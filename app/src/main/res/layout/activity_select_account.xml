@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountSelectionActivity">
+
+
+    <TextView
+        android:id="@+id/showUID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="UID: "
+        android:textColor="#9C27B0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/greetingMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="0dp"
+            android:layout_marginTop="681dp"
+            android:text="Location Finder"
+            android:textColor="#BDCABD"
+            android:textSize="30dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/finderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Add"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="12dp"
+            android:text="No change found" />
+
+        <Button
+            android:id="@+id/Add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Update"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Add Value" />
+
+        <Button
+            android:id="@+id/Update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:text="Update Values" />
+
+        <LinearLayout
+            android:id="@+id/aLinearLayout"
+            android:layout_width="200dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="200dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

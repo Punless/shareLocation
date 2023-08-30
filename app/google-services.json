@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "428506406443",
+    "project_id": "anotherfirebasetest-83ecd",
+    "storage_bucket": "anotherfirebasetest-83ecd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428506406443:android:dbf62704c8cfbfcdc4d46e",
+        "android_client_info": {
+          "package_name": "com.jierui.shareLocation
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428506406443-jqlolrpviaacpl8la7rslac28lbj3a9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdOCrL8I5WLaSp2mPZSrd_oP4RU1-ihCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428506406443-jqlolrpviaacpl8la7rslac28lbj3a9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
