@@ -47,33 +47,26 @@ public class RegisterActivity extends AppCompatActivity {
         sendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!email.getText().toString().isEmpty() &&
-                email.getText().toString().contains("@")) {
-                    if (!email.getText().toString().isEmpty() && email.getText().toString().contains("@") &&
-                            !username.getText().toString().isEmpty() && !password.getText().toString().isEmpty())
-                    {
-                        CreateAccount(email.getText().toString(),password.getText().toString(),username.getText().toString());
-                    }
-                    else {
-                        if (email.getText().toString().isEmpty()){
-                            invalidinfo(1);
-                        }
-                        else if (!email.getText().toString().contains("@")){
-                            invalidinfo(2);
-                        }
-                        else if (username.getText().toString().isEmpty()){
-                            invalidinfo(3);
-                        }
-                        else if (password.getText().toString().isEmpty()){
-                            invalidinfo(4);
-                        }
 
-                    }
+                if (email.getText().toString().isEmpty()) {
+                    invalidinfo(1);
+                    return;
                 }
-                else {
-                    Toast.makeText(RegisterActivity.this,"Invalid Email",
-                        Toast.LENGTH_SHORT).show();
+                if (!email.getText().toString().contains("@")){
+                    invalidinfo(2);
+                    return;
                 }
+                if (username.getText().toString().isEmpty()){
+                    invalidinfo(3);
+                    return;
+                }
+                if (password.getText().toString().isEmpty())
+                {
+                    invalidinfo(4);
+                    return;
+                }
+                createAccount(email.getText().toString(),password.getText().toString(),username.getText().toString());
+
 
 
             }
@@ -102,17 +95,16 @@ public class RegisterActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseAuth mAuth;
-// ...
+
 // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Toast.makeText(RegisterActivity.this,"User already signed in...",
                     Toast.LENGTH_SHORT).show();
         }
     }
-    private void CreateAccount(String email, String password, String username) {
+    private void createAccount(String email, String password, String username) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -141,6 +133,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void invalidinfo(int errorcode)
     {
+        //TODO Turn this into switchcase + default clause
+
+
         String errorMessage = null;
         if (errorcode == 1)
         {

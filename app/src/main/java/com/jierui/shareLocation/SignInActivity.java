@@ -28,7 +28,7 @@ import com.google.android.gms.tasks.Task;
 
 
 
-    
+
 public class SignInActivity extends BaseActivity {
 
     @Override
@@ -145,7 +145,6 @@ public class SignInActivity extends BaseActivity {
                     signIn(usernameInput.getText().toString(),passwordInput.getText().toString());
 
                 }
-
 
                 /*
                 String inputStr = String.valueOf(usernameInput.getText());

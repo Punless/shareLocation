@@ -20,11 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.function.Consumer;
+
 public abstract class BaseActivity extends AppCompatActivity {
-    enum Answer {YES, NO}
-    static Answer choice;
     public DatabaseReference mDat;
     FirebaseAuth mAuth;
+    private static final String TAG = "BaseActivity";
 
     //User properties
     public String username;
@@ -67,19 +68,40 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast.makeText(this, mToastMsg, Toast.LENGTH_SHORT).show();
     }
 
-    public void readDataOnce(String Path, Result result){
-        mDat = FirebaseDatabase.getInstance().getReference(Path);
+    public void readDataOnce(String path, Consumer<Task<DataSnapshot>> consumer){
+        mDat = FirebaseDatabase.getInstance().getReference(path);
         mDat.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete  (@NonNull Task<DataSnapshot> task) {
-
+                if (task.isSuccessful())
+                {
+                    consumer.accept(task);
+                }
+                if (task.isCanceled())
+                {
+                    consumer.accept(null);
+                    Log.e(TAG, "Error retrieving data...");
+                }
             }
         });
     }
-
-    public interface Result {
-        void returnValue(String result);
+    public void attachListener(String path, Consumer<String> consumer){
+        mDat = FirebaseDatabase.getInstance().getReference(path);
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                consumer.accept(snapshot.getValue().toString());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                consumer.accept(null);
+                Log.e(TAG, "Error retrieving data...");
+            }
+        };
+        mDat.addValueEventListener(postListener);
     }
+
+
 
 
 

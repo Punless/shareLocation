@@ -80,14 +80,6 @@ public class DisplayCoordinatesActivity extends BaseActivity {
     }
 
 
-    public void onResume() {
-
-        super.onResume();
-
-
-
-
-    }
     private void getLatitude(String ID){
 
         //TODO MAKE FUNCTIONS TO GET A REFERENCE AND "PUSH" OR ATTACH LISTENERS
