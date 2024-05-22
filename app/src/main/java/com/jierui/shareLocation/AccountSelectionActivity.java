@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AccountSelectionActivity extends AppCompatActivity {
+public class AccountSelectionActivity extends AppCompatActivity  {
     private DatabaseReference mDatabase;
     FirebaseAuth mAuth;
     public int buttonID;
@@ -36,7 +36,7 @@ public class AccountSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_account);
+
         FirebaseUser user = mAuth.getInstance().getCurrentUser();
 
         //getUID
@@ -84,13 +84,8 @@ public class AccountSelectionActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
     }
+
 
     private void Clear() {
         TextView finderText = findViewById(R.id.finderText);

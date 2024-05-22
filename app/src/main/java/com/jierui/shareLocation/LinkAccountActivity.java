@@ -72,6 +72,7 @@ public class LinkAccountActivity extends AppCompatActivity {
 
     }
 
+
     private void updateUI() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null)

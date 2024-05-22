@@ -122,6 +122,8 @@ public class SendCoordinatesActivity extends AppCompatActivity {
 
     }
 
+
+
     private FusedLocationProviderClient fusedLocationClient;
 
     private void getLocation() {

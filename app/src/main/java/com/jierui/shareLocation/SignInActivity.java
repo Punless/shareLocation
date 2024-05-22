@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,53 +30,43 @@ import com.google.android.gms.tasks.Task;
 
 
 
-public class SignInActivity extends BaseActivity {
 
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_signin;//your layout
-    }
+
+public class SignInActivity extends AppCompatActivity {
+
 
     private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseAuth mAuth;
-
-        TextView showUID = findViewById(R.id.showUID);
-
 // ...
 // Initialize Firebase Auth
+    public void onStart(Bundle savedInstanceState) {
+        super.onStart();
+        FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             String autologinusername = currentUser.getUid();
-            Toast.makeText(SignInActivity.this,"User already signed in...",
+            Toast.makeText(SignInActivity.this, "User already signed in...",
                     Toast.LENGTH_SHORT).show();
-            if (currentUser.isEmailVerified() == true)
-            {
+            if (currentUser.isEmailVerified() == true) {
                 startMyActivity(autologinusername);
-            }
-            else
-            {
-                Toast.makeText(SignInActivity.this,"Please verify!",
+            } else {
+                Toast.makeText(SignInActivity.this, "Please verify!",
                         Toast.LENGTH_SHORT).show();
                 sendEmailVerification();
             }
 
         }
     }
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
         Log.d(TAG, "This program is running");
-        //TODO Allow the user to input a name, then a key phrase. Output the keyphrase when loading
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
+        //TODO Allow the user to input a name, then a key phrase. Output the keyphrase when loadingmAuth = FirebaseAuth.getInstance();
         Button submitButton = findViewById(R.id.registbutton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,19 +229,6 @@ public class SignInActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-    public boolean testNull(String s){
-        boolean returnValue;
-        returnValue = s == null;
-        if (returnValue == true)
-        {
-            Log.d(TAG, "Got a null value!");
-        }
-        else
-        {
-            Log.d(TAG, "Did not get a null value!");
-        }
-        return returnValue;
-    }
 
 
 
@@ -262,7 +240,7 @@ public class SignInActivity extends BaseActivity {
     }
 
     public void signIn (String email,String password){
- /*
+        FirebaseApp.initializeApp(SignInActivity.this);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -301,11 +279,8 @@ public class SignInActivity extends BaseActivity {
                         }
                     });
 
-     */
+
         //sign in and update ui
-
-
-
     }
 
     private void updateUI(FirebaseUser o) {
@@ -324,5 +299,11 @@ public class SignInActivity extends BaseActivity {
                         }
                     }
                 });
+    }
+
+    public void startMyActivity(String o) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        intent.putExtra("User",o);
+        startActivity(intent);
     }
 }

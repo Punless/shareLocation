@@ -22,25 +22,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DisplayCoordinatesActivity extends BaseActivity {
+public class DisplayCoordinatesActivity extends AppCompatActivity{
 
     FirebaseUser Auth;
+    DatabaseReference mDat;
     final String TAG = "finderActivity";
 
 
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
-
-
         Intent intent = getIntent();
         String ID = intent.getStringExtra("UID");
         String Name = intent.getStringExtra("DisplayName");
         String Key = intent.getStringExtra("aKey");
-        Toast.makeText(this, ID+","+Name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ID + "," + Name, Toast.LENGTH_SHORT).show();
 
         TextView textName = findViewById(R.id.greetingMessage);
-        textName.setText(Name+"'s location");
+        textName.setText(Name + "'s location");
         Button getLocation = findViewById(R.id.getLocation);
         getLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +68,6 @@ public class DisplayCoordinatesActivity extends BaseActivity {
         });
     }
 
-    @Override
     protected int getContentView() {
         return R.layout.activity_display_coodinates;
     }
@@ -83,21 +83,24 @@ public class DisplayCoordinatesActivity extends BaseActivity {
     private void getLatitude(String ID){
 
         //TODO MAKE FUNCTIONS TO GET A REFERENCE AND "PUSH" OR ATTACH LISTENERS
-        mDat = FirebaseDatabase.getInstance().getReference("Users/"+ID+"/Location/Latitude");
+                //FirebaseDatabase.getInstance().getReference("Users/"+ID+"/Location/Latitude");
+        mDat = FirebaseDatabase.getInstance().getReference("Users/"+ID+"/Location/Longitude");
+
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TextView Lat = findViewById(R.id.Latitude);
-                Lat.setText("Latitude: "+snapshot.getValue().toString());
+                Lat.setText("Latitude: " + snapshot.getValue().toString());
                 Log.w(TAG, "Success!");
                 double latDouble = Double.parseDouble(snapshot.getValue().toString());
                 getLongitude(latDouble, ID);
-                if (snapshot==null){
+                if (snapshot == null) {
                     Toast.makeText(getApplicationContext(), "Value is null", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), "Error :(", Toast.LENGTH_SHORT).show();
@@ -110,6 +113,7 @@ public class DisplayCoordinatesActivity extends BaseActivity {
 
     }
     private void getLongitude(double lat,String ID){
+
         mDat = FirebaseDatabase.getInstance().getReference("Users/"+ID+"/Location/Longitude");
         ValueEventListener anotherListener = new ValueEventListener() {
             @Override
