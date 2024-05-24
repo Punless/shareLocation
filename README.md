@@ -13,6 +13,6 @@ View other account's location (with permission only)
 
 ## Demo
 
-https://github.com/Punless/shareLocation/blob/main/AppSide.gif?raw=true
+AppSide.gif
 
 https://github.com/Punless/shareLocation/blob/main/databasesideGIF.gif?raw=true
